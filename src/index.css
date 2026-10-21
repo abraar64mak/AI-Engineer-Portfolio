@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f4f2ee; --card: #fff; --ink: #0d0d0d; --ink-2: #3a3a3a; --mute: #77756f; --faint: #a9a6a0;
+  --line: rgba(13, 13, 13, 0.1); --soft: #e9e6e0; --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: clamp(18px, 4vw, 64px);
+  color-scheme: light;
+}
+html { background: var(--paper); }
+body { @apply bg-paper font-sans text-ink antialiased; overflow-x: hidden; }
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.dark-scope :focus-visible { outline-color: #22d3ee; }
+
+@layer base {
+  a, button { color: inherit; }
+  h1, h2, h3 { @apply font-sans; }
+}
+
+/* ---------- light design system ---------- */
+.wrap { max-width: 1320px; margin: 0 auto; padding-inline: var(--gutter); }
+.section { padding-block: clamp(96px, 14vh, 160px); }
+.h2 { font-weight: 700; letter-spacing: -0.045em; line-height: 1; font-size: clamp(2.4rem, 6vw, 4.6rem); }
+.h2 em, .serif-accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; color: var(--mute); letter-spacing: -0.02em; }
+.tag { font-family: 'JetBrains Mono Variable', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); }
+.card-l { background: var(--card); border-radius: 26px; box-shadow: inset 0 0 0 1px var(--line); }
+.pill { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 999px; padding: 0.8rem 1.35rem; font-size: 14px; font-weight: 600; transition: transform 0.5s var(--ease), background 0.3s, color 0.3s, box-shadow 0.3s; }
+.pill:hover { transform: translateY(-2px); }
+.pill-solid { background: var(--ink); color: #fff; }
+.pill-solid:hover { background: #2a2a2a; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5); }
+.pill-line { box-shadow: inset 0 0 0 1px rgba(13, 13, 13, 0.2); background: transparent; }
+.pill-line:hover { background: var(--ink); color: #fff; }
+
+/* reveal on scroll */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.rv.is-in { opacity: 1; transform: none; }
+.rv-mask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.rv-mask > span { display: inline-block; transform: translateY(108%); transition: transform 1s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+.rv-mask.is-in > span { transform: none; }
+
+.ecg-draw { stroke-dasharray: 2600; animation: draw 7s linear infinite; }
+.hop { display: inline-block; }
+.hop:hover { animation: hop 0.55s var(--ease); }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+@layer components {
+  .glass {
+    @apply border border-cyan-300/10 bg-ink-800/60 backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 40px -12px rgba(0, 0, 0, 0.6);
+  }
+  .glass-hover {
+    @apply transition-all duration-300;
+  }
+  .glass-hover:hover {
+    @apply border-cyan-300/40;
+    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.15), 0 0 40px -8px rgba(34, 211, 238, 0.35);
+  }
+  .mono-label { @apply font-mono text-[11px] uppercase tracking-[0.18em] text-cyan-300/70; }
+  .section-title { @apply text-3xl font-bold tracking-tight text-white sm:text-4xl; }
+  .chip {
+    @apply inline-flex items-center rounded-md border border-cyan-300/15 bg-cyan-300/5 px-2 py-0.5 font-mono text-[11px] text-cyan-100/80;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300;
+  }
+  .btn-primary { @apply bg-cyan-300 text-ink-950 hover:bg-cyan-200; box-shadow: 0 0 28px -4px rgba(34, 211, 238, 0.6); }
+  .btn-ghost { @apply border border-cyan-300/25 text-cyan-100 hover:border-cyan-300/60 hover:bg-cyan-300/10; }
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---- dashboard panels ---- */
+.panel {
+  position: relative;
+  border: 1px solid rgba(34, 211, 238, 0.13);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(14, 24, 42, 0.9), rgba(8, 14, 27, 0.9));
+  box-shadow: 0 10px 40px -18px rgba(0, 0, 0, 0.8);
+}
+.panel::before, .panel::after {
+  content: ''; position: absolute; width: 14px; height: 14px; opacity: 0.8; pointer-events: none;
+}
+.panel::before { top: -1px; left: -1px; border-top: 2px solid #22d3ee; border-left: 2px solid #22d3ee; border-top-left-radius: 14px; }
+.panel::after { bottom: -1px; right: -1px; border-bottom: 2px solid #22d3ee; border-right: 2px solid #22d3ee; border-bottom-right-radius: 14px; }
+.panel-hover { transition: border-color .25s, box-shadow .25s, transform .25s; }
+.panel-hover:hover { border-color: rgba(34, 211, 238, 0.45); box-shadow: 0 0 40px -10px rgba(34, 211, 238, 0.35); }
+.ecg-paper {
+  background-image:
+    linear-gradient(rgba(251, 113, 133, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251, 113, 133, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv, .rv-mask > span { opacity: 1 !important; transform: none !important; }
+  .ecg-draw { animation: none; stroke-dasharray: none; }
+}
+
+@keyframes pop { 0% { transform: scale(0.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+@keyframes breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.006, 1.012); } }
