@@ -7,7 +7,7 @@ const MSGS: Msg[] = [
   { t: 0.5, text: 'Hi, I’m Abraar.' },
   { t: 3.0, text: 'I’m an AI engineer: agents, RAG and document intelligence.' },
   { t: 6.4, text: 'Now at CDF: LangGraph agents that review contracts. 65% less triage time.' },
-  { t: 10.2, text: 'Before that, BeatNet at Aventusoft: real-time ECG AI on wearables.' },
+  { t: 10.2, text: 'LLM agents too: a LangGraph + MCP data assistant, 75% SQL accuracy, 65 attack tests passed.' },
   { t: 14.0, text: 'And at Plumb5, FAISS search that lifted precision 12%.' },
   { t: 17.6, text: 'M.S. in AI Systems, University of Florida. B.Tech, Anna University.' },
   { t: 21.4, text: 'Two Best Paper awards along the way.' },
