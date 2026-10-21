@@ -5,8 +5,8 @@ interface Msg { t: number; text: string; cta?: boolean }
 /** When each message "arrives", in seconds into the 7.2 s hero loop (timed to the lip movement). */
 const MSGS: Msg[] = [
   { t: 0.5, text: 'Hi, I’m Abraar.' },
-  { t: 1.9, text: 'I build production AI systems: RAG, agents and document intelligence.' },
-  { t: 3.8, text: 'Hands-on with LangGraph, MCP and LLM evaluation.' },
+  { t: 1.9, text: 'I build production AI systems: agents and document intelligence.' },
+  { t: 3.8, text: 'Hands-on experience with LangGraph, MCP and evaluation.' },
   { t: 5.4, text: 'Open to AI roles. Let’s talk →', cta: true },
 ]
 const TYPING = 0.6      // typing dots show this long before a message lands
